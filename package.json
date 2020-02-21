@@ -19,7 +19,8 @@
     "serve": "./node_modules/.bin/gatsby serve",
     "test:watch": "jest --config ./src/jest.config.json --watch",
     "test": "jest --config ./src/jest.config.js",
-    "e2e": "jest --config ./e2e/jest.config.json",
+    "e2e:prod": "npx cypress open --config-file ./cypress/config/production.json",
+    "e2e": "npx cypress open --config-file ./cypress/config/development.json",
     "storybook": "start-storybook -s ./static -p 6006",
     "build-storybook": "build-storybook"
   },

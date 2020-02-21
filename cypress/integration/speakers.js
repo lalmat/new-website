@@ -3,7 +3,15 @@ describe('I can use the speakers list', () => {
         cy.visit('/speakers');
     });
 
-    it('Going to the speakers list, access to the Alexis janvier and come back to the list', () => {
+    it('Going to the speakers list and see all speakers', () => {
+        // cy.get('nav > [aria-current="page"]').should(
+        //     'have.text',
+        //     'les speakers',
+        // );
+        cy.get('.speakerItem').should('have.length', 33);
+    });
+
+    it('Going to the speakers list, access to Alexis janvier and come back to the list', () => {
         cy.get('[href="/speakers/alexis-janvier"]').click();
         cy.get('h1').should('have.text', 'Alexis Janvier');
         cy.contains('Retour à la liste').click();
