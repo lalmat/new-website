@@ -4,10 +4,10 @@ describe('I can use the speakers list', () => {
     });
 
     it('Going to the speakers list and see all speakers', () => {
-        // cy.get('nav > [aria-current="page"]').should(
-        //     'have.text',
-        //     'les speakers',
-        // );
+        cy.get('nav > [aria-current="page"]').should(
+            'have.text',
+            'les speakers',
+        );
         cy.get('.speakerItem').should('have.length', 33);
     });
 
