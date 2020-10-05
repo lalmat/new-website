@@ -1,4 +1,4 @@
-describe.only('I can access to the home page', () => {
+describe('I can access to the home page', () => {
     beforeEach(() => {
         cy.visit('/');
     });
