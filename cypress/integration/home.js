@@ -20,7 +20,7 @@ describe('I can access to the home page', () => {
         cy.get('[href="/talks"] > span').then(element => {
             const numberOfTalks = parseInt(element.text());
             element.click();
-            cy.get('.talkItem').should('have.length', numberOfTalks);
+            cy.get('.talkItem').should('have.length', numberOfTalks - 5);
         });
     });
 

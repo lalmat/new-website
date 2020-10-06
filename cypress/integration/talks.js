@@ -1,26 +1,33 @@
-describe('I can use the talks list', () => {
-    beforeEach(() => {
-        cy.visit('/talks');
+describe("I can use the talks list", () => {
+  beforeEach(() => {
+    cy.visit("/talks");
+  });
+
+  it("Should be able to filter talks by a tag", () => {
+    const TAG_SELECTOR = '[href="/talks?tag=agile"]';
+
+    cy.get(".tagsList")
+      .find(TAG_SELECTOR)
+      .click();
+
+    cy.get(TAG_SELECTOR).then($el => {
+      const element = cy.wrap($el);
+      element.contains("agile");
+      element.parent().should("have.class", "current");
     });
 
-    // it('Going to the talk list and access to a talk', () => {
-    //     cy.get('[href="/speakers/alexis-janvier"]').click();
-    //     cy.get('h1').should('have.text', 'Alexis Janvier');
-    //     cy.contains('Retour à la liste').click();
-    //     cy.url().should('contains', '/speakers');
-    // });
+    cy.get(".talksContainer > div").each($el => {
+      const element = cy.wrap($el).find(TAG_SELECTOR);
+      element.should("exist");
+      element.parent().should("have.class", "current");
+    });
+  });
 
-    // it('Going to the speakers list and submit a talk', () => {
-    //     cy.get('[href="/call-for-speakers"]:first').click();
-    //     cy.get('input[name="speaker"]').type('Dark Vador');
-    //     cy.get('input[name="title"]').type('How to build a death star');
-    //     cy.get('select[name="format"]').select('talk');
-    //     cy.get('textarea[name="message"]').type(
-    //         `I will show you how to build a death star and how to conqueer the galaxy.
-    //         Jedi are not allowed even if when I was a child I was a jedi...`,
-    //     );
-    //     cy.get('input[name="contact"]').type('dark.vador@galacticempire.com');
-    //     cy.get('button[type="submit"]').click();
-    //     cy.url().should('eq', 'https://formspree.io/contact@alexisjanvier.net');
-    // });
+  it("Going to the talk list and access to a talk", () => {
+    const TITLE_LINK =
+      "/talks/edition-16-gestion-agile-de-projet-et-marche-de-noel";
+    const TITLE_TEXT = "Gestion agile de projet et Marché de Noël";
+    cy.get(`[href="${TITLE_LINK}"]`).click();
+    cy.get("h1").contains(TITLE_TEXT);
+  });
 });
